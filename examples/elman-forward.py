@@ -5,10 +5,10 @@ import subprocess
 import os
 import random
 
-from is13.data import load
-from is13.rnn.elman import model
-from is13.metrics.accuracy import conlleval
-from is13.utils.tools import shuffle, minibatch, contextwin
+from data import load, load_products
+from rnn.elman import model
+from metrics.accuracy import conlleval
+from utils.tools import shuffle, minibatch, contextwin
 
 if __name__ == '__main__':
 
@@ -28,6 +28,8 @@ if __name__ == '__main__':
 
     # load the dataset
     train_set, valid_set, test_set, dic = load.atisfold(s['fold'])
+    train_set, valid_set, test_set, dic = load_products.load_data()
+
     idx2label = dict((k,v) for v,k in dic['labels2idx'].iteritems())
     idx2word  = dict((k,v) for v,k in dic['words2idx'].iteritems())
 
