@@ -21,8 +21,8 @@ def minibatch(l, bs):
     will output:
     [[0],[0,1],[0,1,2],[1,2,3]]
     '''
-    out  = [l[:i] for i in range(1, min(bs,len(l)+1) )]
-    out += [l[i-bs:i] for i in range(bs,len(l)+1) ]
+    out = [l[:i] for i in range(1, min(bs,len(l)+1))]
+    out += [l[i-bs:i] for i in range(bs,len(l)+1)]
     assert len(l) == len(out)
     return out
 
@@ -37,8 +37,8 @@ def contextwin(l, win):
     assert win >=1
     l = list(l)
 
-    lpadded = win/2 * [-1] + l + win/2 * [-1]
-    out = [ lpadded[i:i+win] for i in range(len(l)) ]
+    lpadded = int(win/2) * [-1] + l + int(win/2) * [-1]
+    out = [lpadded[i:i+win] for i in range(len(l))]
 
     assert len(out) == len(l)
     return out
