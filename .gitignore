@@ -1,0 +1,7 @@
+*.pyc
+venv*
+.idea
+*.pckl
+*.gz
+*.nyp
+*.txt

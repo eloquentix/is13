@@ -1,6 +1,6 @@
 import numpy
 import pdb
-import cPickle
+import pickle
 import random
 import os
 import stat
@@ -72,7 +72,7 @@ def get_perfo(filename):
         cmd = PREFIX + 'conlleval.pl < %s | grep accuracy > %s'%(filename,tempfile)
     else:
         cmd = './conlleval.pl < %s | grep accuracy > %s'%(filename,tempfile)
-    print cmd
+    print(cmd)
     out = os.system(cmd)
     out = open(tempfile).readlines()[0].split()
     os.system('rm %s'%tempfile)
@@ -83,4 +83,4 @@ def get_perfo(filename):
 
 if __name__ == '__main__':
     #print get_perf('valid.txt')
-    print get_perf('valid.txt')
+    print(get_perf('valid.txt'))
