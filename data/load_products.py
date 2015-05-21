@@ -47,7 +47,7 @@ def load_data():
     test_target = [[target_lex[t] for t in sent] for sent in test_target]
     dic = {'labels2idx': target_lex, 'words2idx': lex}
     # to make sure
-    data = list(zip(test_corpus, test_target))
+    data = list(zip(test_sents, test_target))
     shuffle(data)
     test, valid = test_validate_split(data, test_size=0.5)
     train_lex, train_y = train_sents, train_target

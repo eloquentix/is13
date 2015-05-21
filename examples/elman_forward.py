@@ -69,14 +69,12 @@ def main():
                 rnn.train(word_batch, label_last_word, s['clr'])
                 rnn.normalize()
             if s['verbose']:
-                print('[learning] epoch %i >> %2.2f%%' % (e, (i+1)*100./n_sentences), 'completed in %.2f (sec) <<\r' % \
-                                                                                      (time.time()-tic),
-                sys.stdout.flush())
-            
+                data = '[learning] epoch %i >> %2.2f%% completed in %.2f (sec) <<' % \
+                       (e, (i+1)*100./n_sentences, (time.time()-tic))
+                print_function(data)
+
         # evaluation // back into the real world : idx -> words
-        predictions_test = [map(lambda x: idx2label[x],
-                            rnn.classify(numpy.asarray(contextwin(x, s['win'])).astype('int32')))
-                            for x in test_lex]
+        predictions_test = [map(lambda x: idx2label[x], rnn.classify(numpy.asarray(contextwin(x, s['win'])).astype('int32'))) for x in test_lex]
         groundtruth_test = [map(lambda x: idx2label[x], y) for y in test_y]
         words_test = [map(lambda x: idx2word[x], w) for w in test_lex]
 
@@ -113,6 +111,11 @@ def main():
             break
 
     print('BEST RESULT: epoch', e, 'valid F1', s['vf1'], 'best test F1', s['tf1'], 'with the model', folder)
+
+
+def print_function(data):
+    sys.stdout.write('\r\x1b[K{}'.format(data))
+    sys.stdout.flush()
 
 if __name__ == '__main__':
     main()

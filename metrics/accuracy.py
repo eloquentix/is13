@@ -11,6 +11,7 @@ from data.load import download
 
 PREFIX = os.getenv('ATISDATA', '')
 
+
 def conlleval(p, g, w, filename):
     '''
     INPUT:
@@ -46,17 +47,19 @@ def get_perf(filename):
         chmod('conlleval.pl', stat.S_IRWXU) # give the execute permissions
 
     proc = subprocess.Popen(["perl", _conlleval], stdin=subprocess.PIPE, stdout=subprocess.PIPE)
-    stdout, _ = proc.communicate(open(filename).read())
-    for line in stdout.split('\n'):
+    stdout, _ = proc.communicate(open(filename, 'rb').read())
+    text = stdout.decode('utf8')
+    for line in text.split('\n'):
         if 'accuracy' in line:
             out = line.split()
             break
     
     precision = float(out[6][:-2])
-    recall    = float(out[8][:-2])
-    f1score   = float(out[10])
+    recall = float(out[8][:-2])
+    f1score = float(out[10])
 
     return {'p':precision, 'r':recall, 'f1':f1score}
+
 
 def get_perfo(filename):
     ''' 
