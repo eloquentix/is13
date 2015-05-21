@@ -5,3 +5,4 @@ venv*
 *.gz
 *.nyp
 *.txt
+.DS_Store

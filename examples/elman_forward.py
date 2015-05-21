@@ -90,6 +90,9 @@ def main():
         res_test  = conlleval(predictions_test, groundtruth_test, words_test, folder + '/current.test.txt')
         res_valid = conlleval(predictions_valid, groundtruth_valid, words_valid, folder + '/current.valid.txt')
 
+        print(" -- Pre: %r" % res_valid['p'])
+        print(" -- Rec: %r" % res_valid['r'])
+
         if res_valid['f1'] > best_f1:
             rnn.save(folder)
             best_f1 = res_valid['f1']
