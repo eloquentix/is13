@@ -19,9 +19,9 @@ def main():
          'decay': False,  # decay on the learning rate if improvement stops
          'win': 7,  # number of words in the context window
          'bs': 9,  # number of backprop through time steps
-         'nhidden': 100,  # number of hidden units
+         'nhidden': 50,  # number of hidden units
          'seed': 345,
-         'emb_dimension': 100,  # dimension of word embedding
+         'emb_dimension': 20,  # dimension of word embedding
          'nepochs': 50}
 
     folder = os.path.basename(__file__).split('.')[0]
